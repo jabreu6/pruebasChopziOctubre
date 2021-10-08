@@ -1,0 +1,28 @@
+<odoo>
+    <menuitem name="Chopzi Integrations" id="3mit_chopzi_integration.chopzi_operations_main_menu"
+              web_icon="3mit_chopzi_integration,static/description/icon.png" sequence="1"/>
+
+    <menuitem name="Operaciones" id="3mit_chopzi_integration.chopzi_operations_main_menu_dashboard"
+            parent="3mit_chopzi_integration.chopzi_operations_main_menu"
+            sequence="1" action="chopzi_operation_kanban"/>
+
+    <menuitem id="chopzi_configurations"
+              name="Configuracion"
+              parent="3mit_chopzi_integration.chopzi_operations_main_menu"
+              sequence="2"
+    />
+
+    <menuitem id="chopzi_instances"
+              name="Ver Instancias"
+              parent="chopzi_configurations"
+              action="act_chopzi_config_view"
+              sequence="1"
+    />
+
+    <menuitem id="chopzi_wizard_configurations"
+              name="Añadir Instancia"
+              parent="chopzi_configurations"
+              action="act_call_wizard_chopzi_config"
+              sequence="2"
+    />
+</odoo>

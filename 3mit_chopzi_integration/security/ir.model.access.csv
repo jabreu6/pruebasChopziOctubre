@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_chopzi_operations,access_chopzi_operations,model_chopzi_operations,base.group_user,1,1,1,1
+access_chopzi_config,access_chopzi_config,model_chopzi_config,base.group_user,1,1,1,1
+access_wizard_chopzi_config,access_wizard_chopzi_config,model_wizard_chopzi_config,base.group_user,1,1,1,1
+access_wizard_chopzi_operations,access_wizard_chopzi_operations,model_wizard_chopzi_operations,base.group_user,1,1,1,1

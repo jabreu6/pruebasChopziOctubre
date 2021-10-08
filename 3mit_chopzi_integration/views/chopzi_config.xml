@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+       <!-- Vista form user type -->
+        <record id="chopzi_integration_config_form_view" model="ir.ui.view">
+            <field name="name">Chopzi integration form view</field>
+            <field name="model">chopzi.config</field>
+            <field name="arch" type="xml">
+                <form string="Instancias" create="false" edit="true">
+                    <sheet string="Instancias Sheet">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'required' : True}" string="Instancia"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="user" string="Usuario Odoo" attrs="{'required' : True}"/>
+                                <field name="chopzi_code" string="Codigo Chopzi" attrs="{'required' : True}"/>
+                                <field name="credencial" string="Secret Key" attrs="{'required' : True}"/>
+                                <field name="dataBase" string="Nombre Base de Datos" attrs="{'required' : True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+            <!-- Vista tree user type -->
+        <record id="chopzi_config_tree_view" model="ir.ui.view">
+                <field name="name">chopzi.config.tree</field>
+                <field name="model">chopzi.config</field>
+                <field name="arch" type="xml">
+                    <tree string="Instancias" create="false">
+                        <field name="name" string="Instancia" width="30%"/>
+                        <field name="user" string="Usuario" width="20%"/>
+                        <field name="chopzi_code" string="Código Chopzi" width="50%"/>
+                    </tree>
+                </field>
+        </record>
+s
+
+        <record id="act_chopzi_config_view" model="ir.actions.act_window">
+                <field name="name">Configuracion</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">chopzi.config</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

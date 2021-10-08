@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_move_inherit" model="ir.ui.view">
+            <field name="name">Changing button name</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/button[@name='action_register_payment']" position="attributes">
+                    <attribute name="name">action_register_payment_button</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

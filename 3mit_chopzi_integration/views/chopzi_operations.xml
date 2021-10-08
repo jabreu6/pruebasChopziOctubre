@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record id="view_chopzi_operations_type_kanban" model="ir.ui.view">
+            <field name="name">chopzi operations type kanban</field>
+            <field name="model">chopzi.operations</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" create="false">
+                    <field name="instance_name"/>
+                    <field name="instance_user"/>
+                    <field name="instance_dataBase"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                        <ul>
+                                            <li>
+                                                <field name="instance_name" string="Nombre"/>
+                                            </li>
+                                            <li>
+                                                <field name= "instance_user" string="Usuario"/>
+                                            </li>
+                                            <li>
+                                                <field name= "instance_dataBase" string="Base de Datos"/>
+                                            </li>
+                                        </ul>
+                                        <div class="col-md-4 o_kanban_primary_left px-0">
+                                            <button name="call_wizard" string="Sincronizar" type="object" class="btn-primary">
+                                            <span>Sincronizar</span>
+                                        </button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="chopzi_operation_kanban" model="ir.actions.act_window">
+                <field name="name">Chopzi Operaciones</field>
+                <field name="res_model">chopzi.operations</field>
+                <field name="view_mode">kanban</field>
+                <field name="help" type="html">
+                    <div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p>
+                            <b>Aun no hay ninguna instancia Chopzi configurada.</b>
+                        </p>
+                        <p>
+                            Para añadir una instancia,
+                            ir a 'Configuraciones', 'Crear Instancia' para crear una nueva.
+                        </p>
+                    </div>
+                </field>
+        </record>
+
+        <record id="act_chopzi_kanban_view" model="ir.actions.act_window">
+                <field name="name">operations</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">chopzi.operations</field>
+                <field name="view_mode">kanban</field>
+        </record>
+    </data>
+</odoo>

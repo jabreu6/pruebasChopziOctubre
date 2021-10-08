@@ -1,0 +1,39 @@
+<odoo>
+            <!-- Vista form user type -->
+        <record id="wizard_chopzi_operations" model="ir.ui.view">
+                <field name="name">Sincronizar Instancia</field>
+                <field name="model">wizard.chopzi.operations</field>
+                <field name="arch" type="xml">
+                    <form string="Sicronizar Instancia">
+                        <group col="3">
+                            <field name="instance_id" string="Instancia" readonly="True" options="{'no_open': True}"/>
+                            <field name="opcions" string="Elementos" attrs="{'required' : True}"/>
+                            <field name="atribute_all" string="Sincronizar todos" widget="boolean_toggle"/>
+                        </group>
+                        <group col="2" attrs="{'invisible': [('atribute_all', '=', True)]}">
+                            <label for="date_from" string="Período"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/>
+                                -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <footer>
+                                <button string="Sincronizar" type="object"
+                                        name="selected" class="oe_highlight"/>
+                                <button class="oe_highlight" special="cancel"
+                                        string="Cancelar"/>
+                        </footer>
+                    </form>
+                </field>
+        </record>
+
+        <record id="act_call_wizard_chopzi_operations" model="ir.actions.act_window">
+            <field name="name">Sincronizar</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.chopzi.operations</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_chopzi_operations"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

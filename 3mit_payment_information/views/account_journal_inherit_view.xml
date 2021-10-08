@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_journal_inherit" model="ir.ui.view">
+            <field name="name">Unique code</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="before">
+                    <field name="ref_tipo_pago" placeholder="Código externo único"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

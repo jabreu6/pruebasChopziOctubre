@@ -1,0 +1,33 @@
+<odoo>
+            <!-- Vista form user type -->
+        <record id="wizard_chopzi_config" model="ir.ui.view">
+                <field name="name">Crear Instancia</field>
+                <field name="model">wizard.chopzi.config</field>
+                <field name="arch" type="xml">
+                    <form string="Crear Instancia">
+                        <group string="Datos">
+                            <field name="name" string="Nombre de la Instancia" attrs="{'required' : True}"/>
+                            <field name="user" string="Usuario Odoo" attrs="{'required' : True}"/>
+                            <field name="chopzi_code" string="Codigo Chopzi" attrs="{'required' : True}"/>
+                            <field name="credencial" string="Secret Key" attrs="{'required' : True}"/>
+                            <field name="dataBase" string="Nombre Base de Datos" attrs="{'required' : True}"/>
+                        </group>
+                        <footer>
+                                <button string="Crear" type="object"
+                                        name="instanceChopzi" class="oe_highlight"/>
+                                <button class="oe_highlight" special="cancel"
+                                        string="Cancelar"/>
+                        </footer>
+                    </form>
+                </field>
+        </record>
+
+        <record id="act_call_wizard_chopzi_config" model="ir.actions.act_window">
+            <field name="name">Crear Instancia</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.chopzi.config</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_chopzi_config"/>
+            <field name="target">new</field>
+        </record>
+</odoo>
