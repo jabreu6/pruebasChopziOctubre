@@ -13,8 +13,6 @@ from ..constants import *
 
 _logger = logging.getLogger(__name__)
 
-#TODO: REFACTOR CREATE, API RESPONDE SOLO CUANDO YO PASA, ODOO RESPONDE A API Y API AL USUARIO, COMO SE RESPONDE DESDE ODOO
-
 class respartner_requets(http.Controller):
     @http.route('/createPartner', cors='*', type='http', methods=['POST'], auth='public', csrf=False)
     def func_requets(self, **post):
@@ -29,7 +27,7 @@ class respartner_requets(http.Controller):
                     search = env['res.partner'].sudo().search([],limit=1, order="id desc")
                     if 'identification_id' in search:
                         if(data['is_company']==True):
-                            if(len(data['identificator']) == 11):
+                            if(len(data['identificator']) == 11 and (data['identificator'][0] == "J" or data['identificator'][0] == "V" or data['identificator'][0] == "G" or data['identificator'][0] == "E")):
                                 search = env['res.partner'].sudo().search([('rif', '=', data['identificator'])]).id
                                 if(search == False):
                                     try:
@@ -49,7 +47,7 @@ class respartner_requets(http.Controller):
                             flag = False
                             if len(data['identificator']) >= 9 and len(data['identificator']) <= 10 and (data['identificator'][0] == 'V' or data['identificator'][0] == 'E'):
                                 flag = True
-                            if len(data['identificator']) >= 12 and len(data['identificator']) <= 22 and data['identificator'][0] == 'P':
+                            elif len(data['identificator']) >= 12 and len(data['identificator']) <= 22 and data['identificator'][0] == 'P':
                                 flag = True
                             if flag == True:
                                 search = env['res.partner'].sudo().search([('identification_id', '=', data['identificator'][2:])]).id
@@ -71,17 +69,30 @@ class respartner_requets(http.Controller):
                             missing = "is_company  "
                             self.returnMissing(missing, response, data['name'])
                     else:
-                        search = env['res.partner'].sudo().search([('vat', '=', data['identificator'])]).id
-                        if (search == False):
-                            try:
-                                createPartner = self.modelPartner(data,state)
-                                createPartner['vat'] = data['identificator']
-                                partner = env['res.partner'].sudo().create(createPartner)
-                                self.returnSuccess(data['identificator'], response)  # CREADO
-                            except Exception as err:
-                                self.returnFailed(err, response)  # FALLO EN CREACION
+                        flag = False
+                        if (data['is_company'] == True):
+                            if(len(data['identificator']) == 11 and (data['identificator'][0] == "J" or data['identificator'][0] == "V" or data['identificator'][0] == "G" or data['identificator'][0] == "E")):
+                                flag = True
+                        elif (data['is_company'] == False):
+                            if len(data['identificator']) >= 9 and len(data['identificator']) <= 10 and (data['identificator'][0] == 'V' or data['identificator'][0] == 'E'):
+                                flag = True
+                            elif len(data['identificator']) >= 12 and len(data['identificator']) <= 22 and data['identificator'][0] == 'P':
+                                flag = True
+                        if(flag == True):
+                            search = env['res.partner'].sudo().search([('vat', '=', data['identificator'])]).id
+                            if (search == False):
+                                try:
+                                    createPartner = self.modelPartner(data,state)
+                                    createPartner['vat'] = data['identificator']
+                                    partner = env['res.partner'].sudo().create(createPartner)
+                                    self.returnSuccess(data['identificator'], response)  # CREADO
+                                except Exception as err:
+                                    self.returnFailed(err, response)  # FALLO EN CREACION
+                            else:
+                                self.returnRepeat(data['identificator'], response)  # REPETIDO
                         else:
-                            self.returnRepeat(data['identificator'], response)  # REPETIDO
+                            missing = "identificator  "
+                            self.returnMissing(missing, response, data['identificator'])
                 else:
                     search = env['res.partner'].sudo().search([], limit=1, order="id desc")
                     if 'identification_id' in search:
